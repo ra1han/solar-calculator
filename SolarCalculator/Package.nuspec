@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>solar-calculator</id>
+    <title>Solar Calculator</title>
+    <version>0.5.2</version>
+    <authors>ra1han</authors>
+    <owners>ra1han</owners>
+    <licenseUrl>https://github.com/ra1han/solar-calculator/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/ra1han/solar-calculator</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/ra1han/solar-calculator/master/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package to calculate sunrise and sunset time from longitude and latitude</description>
+    <summary>Package to calculate sunrise and sunset time from longitude and latitude</summary>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags></tags>
+    <dependencies>
+      
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="SolarCalculator\bin\Release\netstandard2.0\SolarCalculator.dll" target="lib\SolarCalculator.dll" />
+  </files>
+</package>
