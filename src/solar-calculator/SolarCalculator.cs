@@ -2,63 +2,33 @@
 
 namespace SolarCalculation
 {
-    public class SolarCalculator
+    public static class SolarCalculator
     {
-        private SunTracker sunTracker;
-
-        public SolarCalculator(double latitude, double longitude, DateTime gregorianDate)
+        public static SunTimes Times(this DateTime timestamp, double latitude, double longitude, TimeSpan? offset = null, bool dst = false)
         {
-            sunTracker = new SunTracker(latitude, longitude, gregorianDate);
+            return Times(latitude, longitude, timestamp, offset, dst);
         }
-
-        public DateTime GetUtcSunRise()
+        
+        public static SunTimes Times(double latitude, double longitude, DateTime? theDate = null, TimeSpan? offset = null, bool dst = false)
         {
-
-            var sunriseJulianDate = sunTracker.SolarTransit - (sunTracker.HourAngle / 360.0);
-            var sunriseUtcGregorianDate = JulianDateConverter.CalculateGregorianDate(sunriseJulianDate, sunTracker.GregorianDate, sunTracker.JulianDate);
-            return sunriseUtcGregorianDate;
-        }
-
-        public DateTime GetSunRise(int timeZone)
-        {
-            var sunriseUtcGregorianDate = GetUtcSunRise();
-            var sunriseLocalGregorianDate = sunriseUtcGregorianDate.AddHours(timeZone);
-
-            return sunriseLocalGregorianDate;
-        }
-
-        public DateTime GetSunRise(int timeZone, bool dayLightSaving)
-        {
-            var sunriseUtcGregorianDate = GetUtcSunRise();
-            var sunriseLocalGregorianDate = sunriseUtcGregorianDate.AddHours(timeZone);
-            sunriseLocalGregorianDate = dayLightSaving ? sunriseLocalGregorianDate.AddHours(1) : sunriseLocalGregorianDate;
-
-            return sunriseLocalGregorianDate;
-        }
-
-        public DateTime GetUtcSunSet()
-        {
-            var sunsetJulianDate = sunTracker.SolarTransit + (sunTracker.HourAngle / 360.0);
-            var sunsetUtcGregorianDate = JulianDateConverter.CalculateGregorianDate(sunsetJulianDate, sunTracker.GregorianDate, sunTracker.JulianDate);
-
-            return sunsetUtcGregorianDate;
-        }
-
-        public DateTime GetSunSet(int timeZone)
-        {
-            var sunriseUtcGregorianDate = GetUtcSunSet();
-            var sunrisetLocalGregorianDate = sunriseUtcGregorianDate.AddHours(timeZone);
-
-            return sunrisetLocalGregorianDate;
-        }
-
-        public DateTime GetSunSet(int timeZone, bool dayLightSaving)
-        {
-            var sunriseUtcGregorianDate = GetUtcSunSet();
-            var sunrisetLocalGregorianDate = sunriseUtcGregorianDate.AddHours(timeZone);
-            sunrisetLocalGregorianDate = dayLightSaving ? sunrisetLocalGregorianDate.AddHours(1) : sunrisetLocalGregorianDate;
-
-            return sunrisetLocalGregorianDate;
+            var timestamp = theDate ?? DateTime.UtcNow;
+            var zoneOffset = offset ?? TimeSpan.Zero;
+            
+            var tracker = new SunTracker(latitude, longitude, timestamp);
+                  
+            return new SunTimes
+            {
+                Local = new SunRiseSet
+                {
+                    Rise = tracker.Sunrise(zoneOffset, dst),
+                    Set = tracker.Sunset(zoneOffset, dst)
+                }.ToSolarDay(),
+                UTC =  new SunRiseSet
+                {
+                    Rise = tracker.UTCSunrise(),
+                    Set = tracker.UTCSunset()
+                }.ToSolarDay(),             
+            };
         }
     }
 }

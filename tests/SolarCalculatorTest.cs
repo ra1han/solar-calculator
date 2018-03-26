@@ -12,9 +12,8 @@ namespace SolarCalculation.Test
         {
             Assert.All("solar-calculation-test-data.csv".ReadRecords<SolarDayTest>(), record =>
             {
-                var solarCalc = new SolarCalculator(record.latitude, record.longitude, record.date);
-                var actualSunrise = solarCalc.GetSunRise(record.timezone, record.dst);
-                var diff = actualSunrise.Subtract(record.sunrise).Duration();
+                var times = record.date.Times(record.latitude, record.longitude, TimeSpan.FromHours(record.timezone), record.dst);                
+                var diff = times.Local.Rise.Subtract(record.sunrise).Duration();
                 Assert.True(diff <= MaxTimeDifference, "Difference " + diff);              
             });
         }
@@ -24,9 +23,8 @@ namespace SolarCalculation.Test
         {
             Assert.All("solar-calculation-test-data.csv".ReadRecords<SolarDayTest>(), record =>
             {
-                var solarCalc = new SolarCalculator(record.latitude, record.longitude, record.date);
-                var actualSunset = solarCalc.GetSunSet(record.timezone, record.dst);                
-                var diff = actualSunset.Subtract(record.sunset).Duration();
+                var times = record.date.Times(record.latitude, record.longitude, TimeSpan.FromHours(record.timezone), record.dst);
+                var diff = times.Local.Set.Subtract(record.sunset).Duration();
                 Assert.True(diff <= MaxTimeDifference, "Difference " + diff);                
             });
         }

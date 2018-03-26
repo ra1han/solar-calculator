@@ -51,7 +51,7 @@ namespace SolarCalculation
             }
         }
 
-        public DateTime GregorianDate { get; private set; }
+        public DateTime GregorianDate { get; }
 
         private double? julianDate;
         private double? solarTransit;
@@ -61,8 +61,8 @@ namespace SolarCalculation
         private double? solarMeanAnomaly;
         private double? eclipticLongitude;
         private double? declinationOfSun;
-        private double latitude;
-        private double longitude;
+        private readonly double latitude;
+        private readonly double longitude;
 
         public SunTracker(double latitude, double longitude, DateTime gregorianDate)
         {

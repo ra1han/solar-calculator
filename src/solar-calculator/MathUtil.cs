@@ -2,7 +2,7 @@
 
 namespace SolarCalculation
 {
-    public static class MathUtil
+    internal static class MathUtil
     {
         public static double Sin(double angleRadian)
         {
