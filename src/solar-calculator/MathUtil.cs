@@ -20,11 +20,11 @@ namespace SolarCalculation
         {
             return Math.Cos(angleRadian);
         }
-        static public double DegreeToRadian(double angleDegree)
+        public static double DegreeToRadian(double angleDegree)
         {
             return (Math.PI * angleDegree / 180.0);
         }
-        static public double RadianToDegree(double angleRadian)
+        public static double RadianToDegree(double angleRadian)
         {
             return (180.0 * angleRadian / Math.PI);
         }

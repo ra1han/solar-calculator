@@ -8,14 +8,14 @@ namespace SolarCalculation
         {
             get
             {
-                if (solarTransit == null)
+                if (solarTransit != null)
                 {
-                    meanSolarTime = meanSolarTime ?? CalculateMeanSolarTime(JulianDate, longitude);
-                    solarMeanAnomaly = solarMeanAnomaly ?? CalculateSolarMeanAnomaly(meanSolarTime.Value);
-                    eclipticLongitude = eclipticLongitude ?? CalculateEclipticLongitude(solarMeanAnomaly.Value);
-                    solarTransit = GetSolarTransit(meanSolarTime.Value, solarMeanAnomaly.Value, eclipticLongitude.Value);
+                    return solarTransit.Value;
                 }
-
+                meanSolarTime = meanSolarTime ?? CalculateMeanSolarTime(JulianDate, longitude);
+                solarMeanAnomaly = solarMeanAnomaly ?? CalculateSolarMeanAnomaly(meanSolarTime.Value);
+                eclipticLongitude = eclipticLongitude ?? CalculateEclipticLongitude(solarMeanAnomaly.Value);
+                solarTransit = GetSolarTransit(meanSolarTime.Value, solarMeanAnomaly.Value, eclipticLongitude.Value);
                 return solarTransit.Value;
             }
         }
@@ -24,14 +24,15 @@ namespace SolarCalculation
         {
             get
             {
-                if (hourAngle == null)
+                if (hourAngle != null)
                 {
-                    meanSolarTime = meanSolarTime ?? CalculateMeanSolarTime(JulianDate, longitude);
-                    solarMeanAnomaly = solarMeanAnomaly ?? CalculateSolarMeanAnomaly(meanSolarTime.Value);
-                    eclipticLongitude = eclipticLongitude ?? CalculateEclipticLongitude(solarMeanAnomaly.Value);
-                    declinationOfSun = GetDeclinationOfSun(eclipticLongitude.Value);
-                    hourAngle = CalculateHourAngle(latitude, declinationOfSun.Value);
+                    return hourAngle.Value;
                 }
+                meanSolarTime = meanSolarTime ?? CalculateMeanSolarTime(JulianDate, longitude);
+                solarMeanAnomaly = solarMeanAnomaly ?? CalculateSolarMeanAnomaly(meanSolarTime.Value);
+                eclipticLongitude = eclipticLongitude ?? CalculateEclipticLongitude(solarMeanAnomaly.Value);
+                declinationOfSun = GetDeclinationOfSun(eclipticLongitude.Value);
+                hourAngle = CalculateHourAngle(latitude, declinationOfSun.Value);
 
                 return hourAngle.Value;
             }
@@ -70,26 +71,27 @@ namespace SolarCalculation
             GregorianDate = gregorianDate.Date;
         }
 
-        private double CalculateHourAngle(double latitude, double declinationOfSun)
+        private static double CalculateHourAngle(double latitude, double declinationOfSun)
         {
             var hourAngle = Math.Acos(
-                                    (MathUtil.Sind(-0.83) - (MathUtil.Sind(latitude) * MathUtil.Sin(declinationOfSun))) /
-                                    ((MathUtil.Cosd(latitude)) * MathUtil.Cos(declinationOfSun)));
+                (MathUtil.Sind(-0.83) - (MathUtil.Sind(latitude) * MathUtil.Sin(declinationOfSun))) /
+                ((MathUtil.Cosd(latitude)) * MathUtil.Cos(declinationOfSun)));
 
             return MathUtil.RadianToDegree(hourAngle);
         }
 
-        private double GetDeclinationOfSun(double elipticLongitude)
+        private static double GetDeclinationOfSun(double elipticLongitude)
         {
             return Math.Asin(MathUtil.Sind(elipticLongitude) * MathUtil.Sind(Constants.EarthMeanObliquity));
         }
 
-        private double GetSolarTransit(double meanSolarNoon, double solarMeanAnomaly, double elipticLongitude)
+        private static double GetSolarTransit(double meanSolarNoon, double solarMeanAnomaly, double elipticLongitude)
         {
-            return Constants.JD02012000 + meanSolarNoon + 0.0053 * ((MathUtil.Sind(solarMeanAnomaly))) - 0.0069 * (MathUtil.Sind(2 * elipticLongitude));
+            return Constants.JD02012000 + meanSolarNoon + 0.0053 * ((MathUtil.Sind(solarMeanAnomaly))) -
+                   0.0069 * (MathUtil.Sind(2 * elipticLongitude));
         }
 
-        private double CalculateEclipticLongitude(double solarMeanAnomaly)
+        private static double CalculateEclipticLongitude(double solarMeanAnomaly)
         {
             var equationOfCenter = CalculateEquationOfCenter(solarMeanAnomaly);
             var eclipticLongitude = CalculateEclipticLongitude(solarMeanAnomaly, equationOfCenter);
@@ -97,7 +99,7 @@ namespace SolarCalculation
             return eclipticLongitude;
         }
 
-        private double CalculateSolarMeanAnomaly(double meanSolarNoon)
+        private static double CalculateSolarMeanAnomaly(double meanSolarNoon)
         {
             var solarMeanAnomaly = (357.5291 + 0.98560028 * meanSolarNoon) % 360;
 
@@ -106,7 +108,7 @@ namespace SolarCalculation
             return solarMeanAnomaly;
         }
 
-        private double CalculateEclipticLongitude(double solarMeanAnomaly, double equationOfTheCenter)
+        private static double CalculateEclipticLongitude(double solarMeanAnomaly, double equationOfTheCenter)
         {
             var elipticLongitude = (solarMeanAnomaly + equationOfTheCenter + 180 + 102.9372) % 360;
             if (elipticLongitude < 0)
@@ -114,17 +116,17 @@ namespace SolarCalculation
             return elipticLongitude;
         }
 
-        private double CalculateEquationOfCenter(double solarMeanAnomaly)
+        private static double CalculateEquationOfCenter(double solarMeanAnomaly)
         {
             return 1.9148 *
-                MathUtil.Sind(solarMeanAnomaly) +
-                0.02 *
-                MathUtil.Sind(2 * solarMeanAnomaly) +
-                0.0003 *
-                MathUtil.Sind(3 * solarMeanAnomaly);
+                   MathUtil.Sind(solarMeanAnomaly) +
+                   0.02 *
+                   MathUtil.Sind(2 * solarMeanAnomaly) +
+                   0.0003 *
+                   MathUtil.Sind(3 * solarMeanAnomaly);
         }
 
-        private double CalculateMeanSolarTime(double julianDate, double longitude)
+        private static double CalculateMeanSolarTime(double julianDate, double longitude)
         {
             var n = julianDate - Constants.JD01012000 + (68.184 / Constants.TotalDaysInYear);
             var meanSolarTime = n - (longitude / 360d);

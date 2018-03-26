@@ -16,7 +16,6 @@ namespace SolarCalculation
 
             var sunriseJulianDate = sunTracker.SolarTransit - (sunTracker.HourAngle / 360.0);
             var sunriseUtcGregorianDate = JulianDateConverter.CalculateGregorianDate(sunriseJulianDate, sunTracker.GregorianDate, sunTracker.JulianDate);
-
             return sunriseUtcGregorianDate;
         }
 

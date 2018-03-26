@@ -1,0 +1,25 @@
+version: '0.0.{build}'
+configuration:
+- Release
+platform: Any CPU
+# Build worker image (VM template)
+image: Visual Studio 2017
+environment:
+  # Don't report back to the mothership
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+init:
+- ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
+before_build:
+- appveyor-retry dotnet restore "src\SolarCalculator.sln" -v Minimal
+- appveyor-retry dotnet restore "tests\SolarCalculator.Test.csproj" -v Minimal
+build_script:
+- dotnet build "src\solar-calculator\SolarCalculator.csproj" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
+- dotnet build "tests\SolarCalculator.Test.csproj" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
+after_build:
+- dotnet pack "src\solar-calculator\SolarCalculator.csproj" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o "..\..\NuGet\SolarCalculator"
+test_script:
+- dotnet test "tests\SolarCalculator.Test.csproj" -c %CONFIGURATION%
+artifacts:
+- path: 'NuGet\SolarCalculator\**\*.*'
+cache:
+- '%USERPROFILE%\.nuget\packages'

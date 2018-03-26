@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SolarCalculation
+﻿namespace SolarCalculation
 {
     public static class Constants
     {
@@ -11,5 +7,4 @@ namespace SolarCalculation
         public const double JD01012000 = 2451545;
         public const double TotalDaysInYear = 86400;
     }
-
 }
