@@ -1,7 +1,22 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>SolarCalculation</RootNamespace>
+    <AssemblyName>solarday-calculator</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company></Company>
+    <Product>SolarDay Calculator</Product>
+    <Version>0.0.6.1</Version>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>
+		Provides a SolarDay calculator tool
+	</Description>
+    <Copyright>2018</Copyright>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Siliconrob/solar-calculator/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/Siliconrob/solar-calculator/blob/master/icon.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/Siliconrob/solar-calculator</RepositoryUrl>
+    <AssemblyVersion>0.0.6.1</AssemblyVersion>
+    <FileVersion>0.0.6.1</FileVersion>
   </PropertyGroup>
-
 </Project>
