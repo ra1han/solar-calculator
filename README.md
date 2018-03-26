@@ -12,13 +12,11 @@ The implementation is based on the algorithm found in these two links -
 The project is available in nuget - https://www.nuget.org/packages/solarday-calculator/
 
 ### Usage
-            //Dhaka's location
-            var latitude = 23.8103; 
-            var longitude = 90.4125;
-            var date = new DateTime(2018, 3, 9);
-            var utcOffset = 18;
-            var dayLightSaving = false;
-
-            var solarCalculator = new SolarCalculator(latitude, longitude, date);
-            var sunrise = solarCalculator.GetSunRise(utcOffset, dayLightSaving);
-            var sunset = solarCalculator.GetSunSet(utcOffset, dayLightSaving);
+            // Fort Worth
+            var location = new
+            {
+                latitude = 32.768799,
+                longitude = -97.309341,
+            };
+            var theDate = new DateTime(2018, 1, 1);  // Jan 1 2018          
+            var results = theDate.Times(location.latitude, location.longitude, TimeSpan.FromHours(-6)); // UTC offset for locale on Jan 1, not using daylight savings
