@@ -6,8 +6,8 @@
 Calculate the sunset and sunrise time based on the date and the latitude/longitude.
 
 The implementation is based on the algorithm found in these two links -
-1. https://en.wikipedia.org/wiki/Sunrise_equation/
-2. http://aa.quae.nl/en/reken/zonpositie.html/
+1. [Sunrise Equation](https://en.wikipedia.org/wiki/Sunrise_equation)
+2. [Sun position](http://aa.quae.nl/en/reken/zonpositie.html)
 
 The project is available in nuget - https://www.nuget.org/packages/solarday-calculator/
 
