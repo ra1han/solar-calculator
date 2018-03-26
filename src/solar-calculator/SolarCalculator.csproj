@@ -6,17 +6,17 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company></Company>
     <Product>SolarDay Calculator</Product>
-    <Version>0.0.6.1</Version>
+    <Version>0.0.6.2</Version>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>
 		Provides a SolarDay calculator tool
 	</Description>
     <Copyright>2018</Copyright>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Siliconrob/solar-calculator</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/Siliconrob/solar-calculator/blob/master/LICENSE.md</PackageLicenseUrl>
-    <PackageIconUrl>https://github.com/Siliconrob/solar-calculator/blob/master/icon.png</PackageIconUrl>
+    <PackageIconUrl>https://cdn.rawgit.com/Siliconrob/solar-calculator/74245c64/icon.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/Siliconrob/solar-calculator</RepositoryUrl>
-    <AssemblyVersion>0.0.6.1</AssemblyVersion>
-    <FileVersion>0.0.6.1</FileVersion>
+    <AssemblyVersion>0.0.6.2</AssemblyVersion>
+    <FileVersion>0.0.6.2</FileVersion>
   </PropertyGroup>
 </Project>
