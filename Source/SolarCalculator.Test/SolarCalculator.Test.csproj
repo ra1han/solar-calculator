@@ -11,7 +11,7 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\solar-calculator\SolarCalculator.csproj" />
+    <ProjectReference Include="..\SolarCalculator\SolarCalculator.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="julian-date-test-data.csv">

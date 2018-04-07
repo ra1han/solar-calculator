@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarCalculator", "solar-calculator\SolarCalculator.csproj", "{A37817D1-B5EA-46FF-9802-6CB0FC620841}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolarCalculator", "SolarCalculator\SolarCalculator.csproj", "{A37817D1-B5EA-46FF-9802-6CB0FC620841}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolarCalculator.Test", "..\tests\SolarCalculator.Test.csproj", "{1D0DFFF8-4AE3-43FE-8CDF-CB799FC22F4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolarCalculator.Test", "SolarCalculator.Test\SolarCalculator.Test.csproj", "{1D0DFFF8-4AE3-43FE-8CDF-CB799FC22F4A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A37817D1-B5EA-46FF-9802-6CB0FC620841} = {A37817D1-B5EA-46FF-9802-6CB0FC620841}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

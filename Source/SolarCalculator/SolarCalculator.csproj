@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>SolarCalculation</RootNamespace>
+    <AssemblyName>solar-calculator</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Company></Company>
+    <Product>Solar Calculator</Product>
+    <Version>0.5.4</Version>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>Package to calculate sunrise and sunset time from longitude and latitude</Description>
+    <Copyright>2018</Copyright>
+    <PackageProjectUrl>https://github.com/ra1han/solar-calculator/</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ra1han/solar-calculator/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/ra1han/solar-calculator/blob/master/icon.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/ra1han/solar-calculator/</RepositoryUrl>
+    <AssemblyVersion>0.5.4.0</AssemblyVersion>
+    <FileVersion>0.5.4.0</FileVersion>
+    <PackageId>solar-calculator</PackageId>
+    <Authors />
+  </PropertyGroup>
+</Project>

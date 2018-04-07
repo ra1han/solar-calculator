@@ -10,15 +10,15 @@ environment:
 init:
 - ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
 before_build:
-- appveyor-retry dotnet restore "src\SolarCalculator.sln" -v Minimal
-- appveyor-retry dotnet restore "tests\SolarCalculator.Test.csproj" -v Minimal
+- appveyor-retry dotnet restore "Source\SolarCalculator.sln" -v Minimal
+- appveyor-retry dotnet restore "Source\SolarCalculator.Test\SolarCalculator.Test.csproj" -v Minimal
 build_script:
-- dotnet build "src\solar-calculator\SolarCalculator.csproj" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
-- dotnet build "tests\SolarCalculator.Test.csproj" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
+- dotnet build "Source\SolarCalculator\SolarCalculator.csproj" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
+- dotnet build "Source\SolarCalculator.Test\SolarCalculator.Test.csproj" -c %CONFIGURATION% --no-dependencies --version-suffix %LABEL%
 after_build:
-- dotnet pack "src\solar-calculator\SolarCalculator.csproj" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o "..\..\NuGet\SolarCalculator"
+- dotnet pack "Source\SolarCalculator\SolarCalculator.csproj" -c %CONFIGURATION% --no-build --version-suffix %LABEL% -o "..\..\NuGet\SolarCalculator"
 test_script:
-- dotnet test "tests\SolarCalculator.Test.csproj" -c %CONFIGURATION%
+- dotnet test "Source\SolarCalculator.Test\SolarCalculator.Test.csproj" -c %CONFIGURATION%
 artifacts:
 - path: 'NuGet\SolarCalculator\**\*.*'
 cache:
