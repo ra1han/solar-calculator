@@ -16,7 +16,7 @@ namespace SolarCalculation.Test
                 longitude = -97.309341,
             };
             var theDate = new DateTime(2018, 1, 1);            
-            var results = theDate.Times(location.latitude, location.longitude, TimeSpan.FromHours(-6));
+            var results = theDate.ToSunTimes(location.latitude, location.longitude, TimeSpan.FromHours(-6));
             var jan1 = new
             {
                 Rise = new DateTime(2018, 1, 1, 7, 31, 0),
@@ -37,7 +37,7 @@ namespace SolarCalculation.Test
         {
             Assert.All("solar-calculation-test-data.csv".ReadRecords<SolarDayTest>(), record =>
             {
-                var times = record.date.Times(record.latitude, record.longitude, TimeSpan.FromHours(record.timezone), record.dst);                
+                var times = record.date.ToSunTimes(record.latitude, record.longitude, TimeSpan.FromHours(record.timezone), record.dst);                
                 var diff = times.Local.Rise.Subtract(record.sunrise).Duration();
                 Assert.True(diff <= MaxTimeDifference, $"Difference {diff}");
             });
@@ -48,7 +48,7 @@ namespace SolarCalculation.Test
         {
             Assert.All("solar-calculation-test-data.csv".ReadRecords<SolarDayTest>(), record =>
             {
-                var times = record.date.Times(record.latitude, record.longitude, TimeSpan.FromHours(record.timezone), record.dst);
+                var times = record.date.ToSunTimes(record.latitude, record.longitude, TimeSpan.FromHours(record.timezone), record.dst);
                 var diff = times.Local.Set.Subtract(record.sunset).Duration();
                 Assert.True(diff <= MaxTimeDifference, $"Difference {diff}");
             });

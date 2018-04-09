@@ -4,7 +4,7 @@ namespace SolarCalculation
 {
     public static class SunTrackerExtensions
     {
-        public static DateTime UTCSunrise(this SunTracker tracker)
+        public static DateTime UtcSunrise(this SunTracker tracker)
         {
 
             var sunriseJulianDate = tracker.SolarTransit - (tracker.HourAngle / 360.0);
@@ -14,7 +14,7 @@ namespace SolarCalculation
 
         public static DateTime Sunrise(this SunTracker tracker, TimeSpan offset)
         {
-            var sunriseUtcGregorianDate = UTCSunrise(tracker);
+            var sunriseUtcGregorianDate = UtcSunrise(tracker);
             var sunriseLocalGregorianDate = sunriseUtcGregorianDate.Add(offset);
 
             return sunriseLocalGregorianDate;
@@ -22,14 +22,14 @@ namespace SolarCalculation
 
         public static DateTime Sunrise(this SunTracker tracker, TimeSpan offset, bool dayLightSaving)
         {
-            var sunriseUtcGregorianDate = UTCSunrise(tracker);
+            var sunriseUtcGregorianDate = UtcSunrise(tracker);
             var sunriseLocalGregorianDate = sunriseUtcGregorianDate.Add(offset);
             sunriseLocalGregorianDate = dayLightSaving ? sunriseLocalGregorianDate.AddHours(1) : sunriseLocalGregorianDate;
 
             return sunriseLocalGregorianDate;
         }
 
-        public static DateTime UTCSunset(this SunTracker tracker)
+        public static DateTime UtcSunset(this SunTracker tracker)
         {
             var sunsetJulianDate = tracker.SolarTransit + (tracker.HourAngle / 360.0);
             var sunsetUtcGregorianDate = JulianDateConverter.CalculateGregorianDate(sunsetJulianDate, tracker.GregorianDate, tracker.JulianDate);
@@ -38,7 +38,7 @@ namespace SolarCalculation
 
         public static DateTime Sunset(this SunTracker tracker, TimeSpan offset)
         {
-            var sunriseUtcGregorianDate = UTCSunset(tracker);
+            var sunriseUtcGregorianDate = UtcSunset(tracker);
             var sunrisetLocalGregorianDate = sunriseUtcGregorianDate.Add(offset);
 
             return sunrisetLocalGregorianDate;
@@ -46,7 +46,7 @@ namespace SolarCalculation
 
         public static DateTime Sunset(this SunTracker tracker, TimeSpan offset, bool dayLightSaving)
         {
-            var sunriseUtcGregorianDate = UTCSunset(tracker);
+            var sunriseUtcGregorianDate = UtcSunset(tracker);
             var sunrisetLocalGregorianDate = sunriseUtcGregorianDate.Add(offset);
             sunrisetLocalGregorianDate = dayLightSaving ? sunrisetLocalGregorianDate.AddHours(1) : sunrisetLocalGregorianDate;
             return sunrisetLocalGregorianDate;

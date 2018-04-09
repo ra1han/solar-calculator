@@ -18,13 +18,13 @@ namespace SolarCalculation
     {
         public static SolarDay ToSolarDay(this SunRiseSet riseSet)
         {
-            var daylight = riseSet.Set.Subtract(riseSet.Rise);
+            var dayLength = riseSet.Set.Subtract(riseSet.Rise);
             return new SolarDay
             {
                 Rise = riseSet.Rise,
                 Set = riseSet.Set,
-                DayLength = daylight,
-                SolarNoon = riseSet.Rise.AddSeconds(daylight.TotalSeconds / 2)
+                DayLength = dayLength,
+                SolarNoon = riseSet.Rise.AddSeconds(dayLength.TotalSeconds / 2)
             };
         }
     }    

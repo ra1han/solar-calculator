@@ -4,17 +4,17 @@ namespace SolarCalculation
 {
     public static class SolarCalculator
     {
-        public static SunTimes Times(this DateTime timestamp, double latitude, double longitude, TimeSpan? offset = null, bool dst = false)
+        public static SunTimes ToSunTimes(this DateTime timeStamp, double latitude, double longitude, TimeSpan? offset = null, bool dst = false)
         {
-            return Times(latitude, longitude, timestamp, offset, dst);
+            return GetSunTimes(latitude, longitude, timeStamp, offset, dst);
         }
-        
-        public static SunTimes Times(double latitude, double longitude, DateTime? theDate = null, TimeSpan? offset = null, bool dst = false)
+
+        private static SunTimes GetSunTimes(double latitude, double longitude, DateTime? dateTime = null, TimeSpan? offset = null, bool dst = false)
         {
-            var timestamp = theDate ?? DateTime.UtcNow;
+            var timeStamp = dateTime ?? DateTime.UtcNow;
             var zoneOffset = offset ?? TimeSpan.Zero;
             
-            var tracker = new SunTracker(latitude, longitude, timestamp);
+            var tracker = new SunTracker(latitude, longitude, timeStamp);
                   
             return new SunTimes
             {
@@ -25,8 +25,8 @@ namespace SolarCalculation
                 }.ToSolarDay(),
                 UTC =  new SunRiseSet
                 {
-                    Rise = tracker.UTCSunrise(),
-                    Set = tracker.UTCSunset()
+                    Rise = tracker.UtcSunrise(),
+                    Set = tracker.UtcSunset()
                 }.ToSolarDay(),             
             };
         }
