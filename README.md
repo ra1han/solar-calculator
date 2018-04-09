@@ -13,12 +13,12 @@ The project is available in nuget - https://www.nuget.org/packages/solar-calcula
 #### Usage
 ```csharp
 
-// Fort Worth
+// Dhaka
 var location = new
 {
-	latitude = 32.768799,
-	longitude = -97.309341,
+	latitude = 23.777176,
+	longitude = 90.399452,
 };
 var theDate = new DateTime(2018, 1, 1);  // Jan 1 2018          
-var results = theDate.Times(location.latitude, location.longitude, TimeSpan.FromHours(-6)); // UTC offset for locale on Jan 1, not using daylight savings
+var results = theDate.Times(location.latitude, location.longitude, TimeSpan.FromHours(18)); // UTC offset for locale on Jan 1, not using daylight savings
 ```
